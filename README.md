@@ -33,4 +33,4 @@ npm run build          # 검사 + 타입체크 + dist/ 생성
 ## 구글 플레이(TWA)
 
 `public/`에 manifest, 서비스 워커(`sw.js`, 운영 빌드에서만 등록), 아이콘, `privacy.html`, `.well-known/assetlinks.json`이 있습니다.
-패키지 이름 `kr.haruword.app`. 출시 전에 `privacy.html`의 `CONTACT_EMAIL`과 `assetlinks.json`의 SHA-256 지문을 채워야 합니다.
+패키지 이름 `kr.englishpuzzle.app`. 출시 전에 `privacy.html`의 `CONTACT_EMAIL`과 `assetlinks.json`의 SHA-256 지문을 채워야 합니다.
