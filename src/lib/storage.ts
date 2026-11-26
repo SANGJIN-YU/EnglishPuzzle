@@ -1,5 +1,6 @@
 import type { Line } from './grid.ts'
 import { EMPTY_STATS, type Stats } from './stats.ts'
+import { backupRecords } from './toss.ts'
 
 /** Progress on one daily board. */
 export interface Play {
@@ -27,6 +28,7 @@ function read<T>(key: string): T | null {
 function write(key: string, value: unknown): void {
   try {
     localStorage.setItem(key, JSON.stringify(value))
+    backupRecords()
   } catch {
     // Private mode or storage full: the game still works for this visit.
   }

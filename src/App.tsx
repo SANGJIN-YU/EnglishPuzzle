@@ -22,6 +22,7 @@ import {
   saveStats,
   type Play,
 } from './lib/storage'
+import { IS_TOSS, tossCopy, tossLink, tossShare } from './lib/toss'
 import { track } from './lib/track'
 
 type Mode = 'daily' | 'practice'
@@ -318,7 +319,7 @@ function Game({ board, streak, bestStreak, onComplete, onPractice, onNewPractice
     track('hint', { kind: board.kind })
   }
 
-  const text = shareText({
+  const shareInput = {
     kind: board.kind,
     number: board.number,
     title: board.title,
@@ -326,11 +327,19 @@ function Game({ board, streak, bestStreak, onComplete, onPractice, onNewPractice
     words,
     hinted: play.hinted,
     elapsed: play.elapsed,
-    url: location.origin,
-  })
+    // Inside Toss the page origin is an internal address; the share link is made on tap.
+    url: IS_TOSS ? '' : location.origin,
+  }
+  const text = shareText(shareInput).trimEnd()
 
   const share = async () => {
     track('share', { kind: board.kind })
+    if (IS_TOSS) {
+      const tossText = shareText({ ...shareInput, url: await tossLink() }).trimEnd()
+      if (await tossShare(tossText)) return
+      setToast((await tossCopy(tossText)) ? '복사했어요. 카톡에 붙여 넣어 보세요.' : '공유가 막혀 있어요. 잠시 후 다시 해 주세요.')
+      return
+    }
     if (prefersNativeShare()) {
       try {
         await navigator.share({ text })
