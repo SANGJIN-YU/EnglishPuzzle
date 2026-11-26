@@ -66,7 +66,7 @@ export function backupRecords(): void {
 export async function tossLink(): Promise<string> {
   try {
     const { Share } = await sdk()
-    return await Share.createLink({ path: 'intoss://englishpuzzle' })
+    return await Share.createLink({ path: 'intoss://haruword' })
   } catch {
     return ''
   }
