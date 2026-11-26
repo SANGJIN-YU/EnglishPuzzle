@@ -37,17 +37,17 @@ npm run build          # 검사 + 타입체크 + dist/ 생성
 
 ## 토스 미니앱(앱인토스, WebView)
 
-같은 코드를 `--mode toss`로 빌드하면 토스 앱 안에서 도는 미니앱 번들(`haru-word.ait`)이 나옵니다. 웹(Cloudflare) 빌드는 그대로입니다.
+같은 코드를 `--mode toss`로 빌드하면 토스 앱 안에서 도는 미니앱 번들(`englishpuzzle.ait`)이 나옵니다. 웹(Cloudflare) 빌드는 그대로입니다.
 
 ```bash
 npm run dev:toss     # 일반 브라우저에서 토스 SDK를 흉내 내는 devtools 패널과 함께 실행
-npm run build:toss   # dist/ 생성 후 프로젝트 루트에 haru-word.ait 생성
-npm run deploy:toss  # haru-word.ait 업로드 (처음엔 콘솔의 API 키 필요: npx ait token add)
+npm run build:toss   # dist/ 생성 후 프로젝트 루트에 englishpuzzle.ait 생성
+npm run deploy:toss  # englishpuzzle.ait 업로드 (처음엔 콘솔의 API 키 필요: npx ait token add)
 ```
 
-- 설정: `apps-in-toss.config.ts`. `appName`은 앱인토스 콘솔에 등록한 앱 이름과 같아야 합니다(현재 `haru-word`).
+- 설정: `apps-in-toss.config.ts`. `appName`은 앱인토스 콘솔에 등록한 앱 이름과 같아야 합니다(현재 `englishpuzzle`).
 - 토스 연동 코드는 `src/lib/toss.ts`에만 있고, 웹 빌드에는 SDK가 들어가지 않습니다.
 - 기록: 로그인 없이 기기 저장 그대로. WebView의 localStorage에 쓰고, 토스 기본 저장소(Storage)에 묶음 백업을 함께 남겨 WebView 저장소가 비면 시작할 때 되살립니다.
-- 공유: 토스 공유 시트(`Share.sendMessage`)에 토스에서 바로 열리는 링크(`intoss://haru-word`)를 붙입니다. 막히면 클립보드 복사.
+- 공유: 토스 공유 시트(`Share.sendMessage`)에 토스에서 바로 열리는 링크(`intoss://englishpuzzle`)를 붙입니다. 막히면 클립보드 복사.
 - 서비스 워커는 토스 빌드에서 등록하지 않습니다(파일이 번들 안에 들어 있음).
 - 배포 결과로 나오는 `intoss-private://...` 주소(또는 콘솔의 QR)를 토스 앱에서 열면 출시 전 테스트를 할 수 있습니다.
